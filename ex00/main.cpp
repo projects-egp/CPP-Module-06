@@ -6,11 +6,11 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 15:09:07 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/08/19 19:53:34 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/08/25 14:13:01 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
+#include "general.hpp"
 
 static bool	storeInput(const std::string& input)
 {
