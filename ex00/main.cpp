@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 15:09:07 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/08/25 14:13:01 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/08/25 17:45:11 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int c, char** v)
 {
 	if (c == 2)
 	{
+		//convert(v[1]);//from ScalarConverter. review cpp02
 		if (storeInput(v[1]))
 			return 0;
 	}
