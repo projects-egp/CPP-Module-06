@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   general.hpp                                        :+:      :+:    :+:   */
+/*   ConversionOutput.hpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/25 14:10:32 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/08/26 17:42:52 by enrgil-p         ###   ########.fr       */
+/*   Created: 2026/08/26 18:31:51 by enrgil-p          #+#    #+#             */
+/*   Updated: 2026/08/26 18:36:14 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GENERAL_HPP
-# define GENERAL_HPP
+#ifndef CONVERSIONOUTPUT.HPP
+# define CONVERSIONOUTPUT.HPP
 
-#include <cstring>
-#include "ScalarConverter.hpp"
-
-typedef enum e_check
+class ConversionOutput
 {
-	CHAR = 0,
-	INT,
-	FLOAT,
-	DOUBLE,
-	ALL,
-	NOT_CONVERTED_YET = 0,
-	CONVERTED = 1,
-	IMPOSSIBLE = 2
-}	t_check;
-
-typedef struct s_types
-{
-	char	chr;
-	int	integer;
-	float	fl;
-	double	dbl;
-	int	check[ALL];
-}	t_types;
+	public:
+		ConversionOutput();
+		ConversionOutput();
+		ConversionOutput();
+		~ConversionOutput();
+	protected:
+	private:
+		char	_char;
+		int	_int;
+		float	_float;
+		double	_double;
+};
 
 #endif
