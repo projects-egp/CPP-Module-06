@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ConversionOutput.hpp                               :+:      :+:    :+:   */
+/*   ConversionOutput.cpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/26 18:31:51 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/08/31 15:29:49 by enrgil-p         ###   ########.fr       */
+/*   Created: 2026/08/31 14:20:32 by enrgil-p          #+#    #+#             */
+/*   Updated: 2026/08/31 14:23:23 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONVERSIONOUTPUT.HPP
-# define CONVERSIONOUTPUT.HPP
+#include "ConversionOutput.hpp"
 
+ConversionOutput::ConversionOutput() {}
 
+ConversionOutput::ConversionOutput(const ConversionOutput &other) {}
 
-class ConversionOutput
-{
-	public:
-		ConversionOutput();
-		ConversionOutput(const ConversionOutput &);
-		ConversionOutput&	operator=(const ConversionOutput &);
-		~ConversionOutput();
-	protected:
-	private:
-		enum	_enumCheck {CHAR = 0, INT, FLOAT, DOUBLE, ALL};
-		char	_char;
-		int	_int;
-		float	_float;
-		double	_double;
-		bool	_check[ALL];
-};
+ConversionOutput&	ConversionOutput::operator=(const ConversionOutput &rhs)
+{}
 
-#endif
+ConversionOutput::~ConversionOutput() {}
