@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 15:02:47 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/08/19 19:52:14 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/08/31 22:56:22 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@
 #include <string>
 #include <iostream>
 
+class ConversionOutput;
+
 class ScalarConverter
 {
 	public:
-		static void	convert(const std::string& input);
+		static void	convert(const std::string& input,
+				ConversionOutput& output);
 	protected:
 	private:
 		ScalarConverter();

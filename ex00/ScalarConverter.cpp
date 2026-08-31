@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:39:04 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/08/26 17:45:09 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/08/31 23:19:06 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,32 +32,31 @@ ScalarConverter::~ScalarConverter() {}
 //
 //
 /*	*	*	CONVERTER && UTILS	*	*	*/
-/*
-static bool	isChar(const std::string& input, t_types *types)
+static bool	isChar(const std::string& input)
 {
-	if (input.length() == 1 && )
-	return true;
+	std::string::const_iterator	i;//const_iterator for const std::string
+	
+	i = input.begin();
+	if (input.length() == 1 && !(isdigit(*i)))
+		return true;
+	else if (input.length() == 3 && /*first and last are "\'\ " */)
+	return false;
 }
 
-static void	typeDetect(const std::string& input, t_types *types)
+static void	typeDetect(const std::string& input)
 {
-	if (isChar(input, types))
+	if (isChar(input))
+		//Cast???
 }
 
-static void	print(t_types *types)
+void	ScalarConverter::convert(const std::string& input,
+		ConversionOutput& output)
 {
-	std::cout << "char: " << types->chr << std::endl;
-}*/
-
-void	ScalarConverter::convert(const std::string& input)
-{
-	t_types	types;
 //	std::string::iterator	i;
 
-	memset(types.check, 0, sizeof(types.check));
 	std::cout << input << std::endl;
 	//typeDetect(input, &types);
 	//Convert string to that type
 	//From converted type, convert to other types
-	//print(&types);
+	//PRINT (in main)
 }

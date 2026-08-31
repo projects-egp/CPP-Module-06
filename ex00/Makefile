@@ -6,13 +6,13 @@
 #    By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/20 15:02:53 by enrgil-p          #+#    #+#              #
-#    Updated: 2026/08/25 14:43:42 by enrgil-p         ###   ########.fr        #
+#    Updated: 2026/08/31 22:23:38 by enrgil-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = scalarConversion_ex00	
 
-SOURCES =	main.cpp ScalarConverter.cpp
+SOURCES =	main.cpp ScalarConverter.cpp ConversionOutput.cpp
 
 COMPILER = c++
 C_FLAGS = -Wall -Wextra -Werror -MMD -MP

@@ -6,35 +6,16 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:10:32 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/08/26 17:42:52 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/08/31 23:04:16 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GENERAL_HPP
 # define GENERAL_HPP
 
-#include <cstring>
+#include <cctype>
+#include <string>
 #include "ScalarConverter.hpp"
-
-typedef enum e_check
-{
-	CHAR = 0,
-	INT,
-	FLOAT,
-	DOUBLE,
-	ALL,
-	NOT_CONVERTED_YET = 0,
-	CONVERTED = 1,
-	IMPOSSIBLE = 2
-}	t_check;
-
-typedef struct s_types
-{
-	char	chr;
-	int	integer;
-	float	fl;
-	double	dbl;
-	int	check[ALL];
-}	t_types;
+#include "ConversionOutput.hpp"
 
 #endif
