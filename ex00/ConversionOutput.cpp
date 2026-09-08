@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/31 14:20:32 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/08 18:36:31 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/08 18:57:24 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ ConversionOutput::ConversionOutput(const ConversionOutput &other) :
 	_char(other._char),
 	_int(other._int),
 	_float(other._float),
-	_double(other._double) {}
+	_double(other._double)
+{
+	for (int i = 0; i < ALL; ++i)
+		this->_check[i] = other._check[i];
+}
 
 ConversionOutput&	ConversionOutput::operator=(const ConversionOutput &rhs)
 {
@@ -33,6 +37,9 @@ ConversionOutput&	ConversionOutput::operator=(const ConversionOutput &rhs)
 		this->_int = rhs._int;
 		this->_float = rhs._float;
 		this->_double = rhs._double;
+		for (int i = 0; i < ALL; ++i)
+			this->_check[i] = rhs._check[i];
+
 	}	
 	return(*this);
 }

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 15:09:07 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/08 18:16:34 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/08 18:42:50 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	print(ConversionOutput obj, int index)
 {
 	switch (index)
 	{
-		case 1:
+		case CHAR:
 			if (obj.getCheck(index) && isprint(obj.getChar()))
 				std::cout << "char: " << obj.getChar() << std::endl;
 			else if (obj.getCheck(index))
@@ -24,11 +24,23 @@ static void	print(ConversionOutput obj, int index)
 			else
 				std::cout << "char: impossible" << std::endl;
 			break;
-		case 2:
+		case INT:
+			if (obj.getCheck(index))
+				std::cout << "int: " << obj.getInt() << std::endl;
+			else
+				std::cout << "int: impossible" << std::endl;
 			break;
-		case 3:
+		case FLOAT:
+			if (obj.getCheck(index))
+				std::cout << "float: " << obj.getFloat() << std::endl;
+			else
+				std::cout << "float: impossible" << std::endl;
 			break;
-		case 4:
+		case DOUBLE:
+			if (obj.getCheck(index))
+				std::cout << "double: " << obj.getDouble() << std::endl;
+			else
+				std::cout << "double: impossible" << std::endl;
 			break;
 	}
 }
@@ -40,7 +52,7 @@ int	main(int c, char** v)
 	if (c == 2)
 	{
 		ScalarConverter::convert(v[1], converted);
-		for (int i = 1; i <= ALL; ++i)
+		for (int i = 0; i < ALL; ++i)
 			print(converted, i);
 		return 0;
 	}
