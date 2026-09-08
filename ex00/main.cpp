@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 15:09:07 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/08 18:42:50 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/08 19:25:55 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	print(ConversionOutput obj, int index)
 	{
 		case CHAR:
 			if (obj.getCheck(index) && isprint(obj.getChar()))
-				std::cout << "char: " << obj.getChar() << std::endl;
+				std::cout << "char: '" << obj.getChar() << "'" << std::endl;
 			else if (obj.getCheck(index))
 				std::cout << "char: Non displayable" << std::endl;
 			else

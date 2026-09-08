@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 15:02:47 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/08/31 22:56:22 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/08 19:14:16 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SCALARCONVERTER_HPP
 
 #include <string>
-#include <iostream>
 
 class ConversionOutput;
 

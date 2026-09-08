@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:39:04 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/08 18:19:12 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/08 19:41:01 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,49 @@ static int	typeDetect(const std::string& input)
 	return -1;
 }
 
+static void	castOtherTypes(Conversionutput& output, int index)
+{
+	switch (index)
+	{
+		case CHAR:
+		case INT:
+		case FLOAT:
+		case DOUBLE:
+	}
+}
+
 void	ScalarConverter::convert(const std::string& input,
 		ConversionOutput& output)
 {
 	int	index;
 
-	(void)output;//debug
 	index = typeDetect(input);
-	if (index == 1)
-		return ;
-	//switch
-	//	Convert string to that type
-	//	From converted type, convert to other types
+	switch (index)
+	{
+		case CHAR:
+			char	c;
+
+			if (input.length() == 1)
+				c = input[0];//IS THIS CORRECT? OR SHOUD CAST?
+			else
+				c = input[1];
+			output.setChar(c);
+			output.setCheck(true, index);
+			castOtherTypes(output, index);
+			break;
+		case INT:
+			output.setCheck(true, index);
+			castOtherTypes(output, index);
+			break;
+		case FLOAT:
+			output.setCheck(true, index);
+			castOtherTypes(output, index);
+			break;
+		case DOUBLE:
+			output.setCheck(true, index);
+			castOtherTypes(output, index);
+			break;
+		default:
+			return;
+	}
 }
