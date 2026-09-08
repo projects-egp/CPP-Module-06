@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:39:04 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/08 17:07:59 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/08 18:19:12 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,18 @@ static int	typeDetect(const std::string& input)
 {
 	if (isChar(input))
 		return CHAR;
+	return -1;
 }
 
 void	ScalarConverter::convert(const std::string& input,
 		ConversionOutput& output)
 {
-	int	index = 0;
+	int	index;
 
 	(void)output;//debug
 	index = typeDetect(input);
+	if (index == 1)
+		return ;
 	//switch
 	//	Convert string to that type
 	//	From converted type, convert to other types

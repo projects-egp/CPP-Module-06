@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:10:32 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/08/31 23:04:16 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/08 18:17:08 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,7 @@
 #include <string>
 #include "ScalarConverter.hpp"
 #include "ConversionOutput.hpp"
+
+enum	_enumCheck {CHAR, INT, FLOAT, DOUBLE, ALL};
 
 #endif
