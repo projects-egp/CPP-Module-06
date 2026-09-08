@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:39:04 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/08/31 23:19:06 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/08 17:07:59 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,27 @@ ScalarConverter::~ScalarConverter() {}
 /*	*	*	CONVERTER && UTILS	*	*	*/
 static bool	isChar(const std::string& input)
 {
-	std::string::const_iterator	i;//const_iterator for const std::string
-	
-	i = input.begin();
-	if (input.length() == 1 && !(isdigit(*i)))
+	if (input.length() == 1 && !isdigit(input[0]))
 		return true;
-	else if (input.length() == 3 && /*first and last are "\'\ " */)
+	else if (input.length() == 3 && input[0] == '\'' && input[2] == '\'')
+		return true;
 	return false;
 }
 
-static void	typeDetect(const std::string& input)
+static int	typeDetect(const std::string& input)
 {
 	if (isChar(input))
-		//Cast???
+		return CHAR;
 }
 
 void	ScalarConverter::convert(const std::string& input,
 		ConversionOutput& output)
 {
-//	std::string::iterator	i;
+	int	index = 0;
 
-	std::cout << input << std::endl;
-	//typeDetect(input, &types);
-	//Convert string to that type
-	//From converted type, convert to other types
-	//PRINT (in main)
+	(void)output;//debug
+	index = typeDetect(input);
+	//switch
+	//	Convert string to that type
+	//	From converted type, convert to other types
 }

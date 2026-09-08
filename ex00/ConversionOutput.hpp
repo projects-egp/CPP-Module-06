@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 18:31:51 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/08/31 22:42:57 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/08 17:14:07 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 class ConversionOutput
 {
 	public:
+		enum	_enumCheck {CHAR, INT, FLOAT, DOUBLE, ALL};
+		//
 		ConversionOutput();
 		ConversionOutput(const ConversionOutput &);
 		ConversionOutput&	operator=(const ConversionOutput &);
@@ -35,7 +37,6 @@ class ConversionOutput
 
 	protected:
 	private:
-		enum	_enumCheck {CHAR, INT, FLOAT, DOUBLE, ALL};
 		char	_char;
 		int	_int;
 		float	_float;
