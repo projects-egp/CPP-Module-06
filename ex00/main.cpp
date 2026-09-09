@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 15:09:07 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/08 19:25:55 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/09 19:24:10 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ static void	print(ConversionOutput obj, int index)
 			break;
 		case FLOAT:
 			if (obj.getCheck(index))
-				std::cout << "float: " << obj.getFloat() << std::endl;
+			{
+				std::cout << std::fixed << std::setprecision(1);
+				std::cout << "float: " << obj.getFloat()
+					<< 'f' << std::endl;
+			}
 			else
 				std::cout << "float: impossible" << std::endl;
 			break;
@@ -56,5 +60,6 @@ int	main(int c, char** v)
 			print(converted, i);
 		return 0;
 	}
+	std::cerr << "Error: expected one argument" << std::endl;
 	return 1;
 }

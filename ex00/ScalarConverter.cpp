@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:39:04 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/08 19:41:01 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/09 20:35:28 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ ScalarConverter::~ScalarConverter() {}
 //
 //
 //
+
 /*	*	*	CONVERTER && UTILS	*	*	*/
+//
+/*	-	-	DETECT TYPE	-	-	*/
 static bool	isChar(const std::string& input)
 {
 	if (input.length() == 1 && !isdigit(input[0]))
@@ -41,21 +44,70 @@ static bool	isChar(const std::string& input)
 	return false;
 }
 
+static bool	isInt(const std::string& input)
+{
+	unsigned int	length;
+
+	length = input.length();
+	for (unsigned int i = 0; i < length; ++i)
+	{
+		if (i == 0 && (input[i] == '-' || input[i] == '+'))
+			++i;
+		else if (!isdigit(input[i]))
+			return false;
+	}
+	return true;
+}
+
+static bool	isFloatingPoint(const std::string& input, int precision)
+{
+}
+
 static int	typeDetect(const std::string& input)
 {
 	if (isChar(input))
 		return CHAR;
+	if (isInt(input))
+		return INT;
+	if isFloatingPoint(input, FLOAT)
+		return FLOAT;
+	if isFloatingPoint(input, DOUBLE)
+		return DOUBLE;
 	return -1;
 }
+/*	-	-	CAST	-	-	*/
 
-static void	castOtherTypes(Conversionutput& output, int index)
+static void	castOtherTypes(ConversionOutput& output, int index)
 {
+
 	switch (index)
 	{
 		case CHAR:
+			char	c;
+			
+			c = output.getChar();
+			output.setInt(static_cast<int>(c));
+			output.setCheck(true, INT);
+			output.setFloat(static_cast<float>(c));
+			output.setCheck(true, FLOAT);
+			output.setDouble(static_cast<double>(c));
+			output.setCheck(true, DOUBLE);
+			break;
 		case INT:
+			int	i;
+
+			i = output.getInt();
+			output.setChar(static_cast<char>(i));
+			output.setCheck(true, CHAR);
+			output.setFloat(static_cast<float>(i));
+			output.setCheck(true, FLOAT);
+			output.setDouble(static_cast<double>(i));
+			output.setCheck(true, DOUBLE);
+			break;
 		case FLOAT:
+			break;
 		case DOUBLE:
+			break;
 	}
 }
 
@@ -79,8 +131,16 @@ void	ScalarConverter::convert(const std::string& input,
 			castOtherTypes(output, index);
 			break;
 		case INT:
-			output.setCheck(true, index);
-			castOtherTypes(output, index);
+			long	preConverted;
+
+			std::stringstream(input) >> preConverted;
+			if (preConverted >= std::numeric_limits<int>::min()
+				&& preConverted <= std::numeric_limits<int>::max())
+			{
+				output.setInt(static_cast<int>(preConverted));
+				output.setCheck(true, index);
+				castOtherTypes(output, index);
+			}
 			break;
 		case FLOAT:
 			output.setCheck(true, index);
