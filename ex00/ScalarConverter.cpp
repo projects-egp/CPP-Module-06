@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:39:04 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/09 20:35:28 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/10 16:51:26 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ ScalarConverter::~ScalarConverter() {}
 
 /*	*	*	CONVERTER && UTILS	*	*	*/
 //
+//
 /*	-	-	DETECT TYPE	-	-	*/
 static bool	isChar(const std::string& input)
 {
@@ -44,37 +45,46 @@ static bool	isChar(const std::string& input)
 	return false;
 }
 
-static bool	isInt(const std::string& input)
+static bool	isNumberType(const std::string& input, int precision)
 {
 	unsigned int	length;
+	bool		pointFound = false;
 
+	//HOW DETECT NAN, NANF, NANFF & co.?????!?!?!?!
 	length = input.length();
 	for (unsigned int i = 0; i < length; ++i)
 	{
 		if (i == 0 && (input[i] == '-' || input[i] == '+'))
-			++i;
-		else if (!isdigit(input[i]))
+			continue;
+		if ((i + 1) == length && precision == FLOAT
+			&& input[i] == 'f' && pointFound)
+			break;
+		if (precision != INT && input[i] == '.' && !pointFound)
+		{
+			pointFound = true;
+			continue;
+		}
+		if (!isdigit(input[i]))
 			return false;
 	}
 	return true;
-}
-
-static bool	isFloatingPoint(const std::string& input, int precision)
-{
 }
 
 static int	typeDetect(const std::string& input)
 {
 	if (isChar(input))
 		return CHAR;
-	if (isInt(input))
+	if (isNumberType(input, INT))
 		return INT;
-	if isFloatingPoint(input, FLOAT)
-		return FLOAT;
-	if isFloatingPoint(input, DOUBLE)
+	if (isNumberType(input, DOUBLE))
 		return DOUBLE;
+	if (isNumberType(input, FLOAT))
+		return FLOAT;
 	return -1;
 }
+//
+//
+//
 /*	-	-	CAST	-	-	*/
 
 static void	castOtherTypes(ConversionOutput& output, int index)
@@ -143,10 +153,18 @@ void	ScalarConverter::convert(const std::string& input,
 			}
 			break;
 		case FLOAT:
+			float f;
+			
+			std::stringstream(input) >> f;
+			output.setFloat(f);
 			output.setCheck(true, index);
 			castOtherTypes(output, index);
 			break;
 		case DOUBLE:
+			double	d;
+
+			std::stringstream(input) >> d;
+			output.setDouble(d);
 			output.setCheck(true, index);
 			castOtherTypes(output, index);
 			break;

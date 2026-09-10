@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 15:09:07 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/09 19:24:10 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/10 16:17:25 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ static void	print(ConversionOutput obj, int index)
 			break;
 		case DOUBLE:
 			if (obj.getCheck(index))
+			{
+				std::cout << std::fixed << std::setprecision(1);
 				std::cout << "double: " << obj.getDouble() << std::endl;
+			}
 			else
 				std::cout << "double: impossible" << std::endl;
 			break;
