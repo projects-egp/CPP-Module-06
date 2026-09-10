@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:39:04 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/10 16:51:26 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/10 19:06:50 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,26 @@ static void	castOtherTypes(ConversionOutput& output, int index)
 			output.setCheck(true, DOUBLE);
 			break;
 		case FLOAT:
+			float	f;
+
+			f = output.getFloat();
+			output.setChar(static_cast<char>(f));
+			output.setCheck(true, CHAR);
+			output.setInt(static_cast<int>(f));
+			output.setCheck(true, INT);
+			output.setDouble(static_cast<double>(f));
+			output.setCheck(true, DOUBLE);
 			break;
 		case DOUBLE:
+			double	d;
+			
+			d = output.getDouble();
+			output.setChar(static_cast<char>(d));
+			output.setCheck(true, CHAR);
+			output.setInt(static_cast<int>(d));
+			output.setCheck(true, INT);
+			output.setFloat(static_cast<float>(d));
+			output.setCheck(true, FLOAT);
 			break;
 	}
 }
@@ -141,30 +159,35 @@ void	ScalarConverter::convert(const std::string& input,
 			castOtherTypes(output, index);
 			break;
 		case INT:
-			long	preConverted;
+			long	preConvertedToInt;
 
-			std::stringstream(input) >> preConverted;
-			if (preConverted >= std::numeric_limits<int>::min()
-				&& preConverted <= std::numeric_limits<int>::max())
+			std::stringstream(input) >> preConvertedToInt;
+			if (preConvertedToInt >= std::numeric_limits<int>::min() && preConvertedToInt <= std::numeric_limits<int>::max())
 			{
-				output.setInt(static_cast<int>(preConverted));
+				output.setInt(static_cast<int>(preConvertedToInt));
 				output.setCheck(true, index);
 				castOtherTypes(output, index);
 			}
 			break;
 		case FLOAT:
-			float f;
+			double	preConvertedToFloat;
 			
-			std::stringstream(input) >> f;
-			output.setFloat(f);
-			output.setCheck(true, index);
-			castOtherTypes(output, index);
+			std::stringstream(input) >> preConvertedToFloat;
+			if (preConvertedToFloat >= std::numeric_limits<float>::lowest()
+				&& preConvertedToFloat <= std::numeric_limits<float>::max())
+			{
+				output.setFloat(preConvertedToFloat);
+				output.setCheck(true, index);
+				castOtherTypes(output, index);
+			}
 			break;
 		case DOUBLE:
-			double	d;
+			long double	preConvertedToDouble;
 
-			std::stringstream(input) >> d;
-			output.setDouble(d);
+			std::stringstream(input) >> preConvertedToDouble;
+			if (preConvertedToDouble >= std::numeric_limits<double>::min()
+				&& preConvertedToDouble <= std::numeric_limits<double>::max())
+			output.setDouble(preConvertedToDouble);
 			output.setCheck(true, index);
 			castOtherTypes(output, index);
 			break;
