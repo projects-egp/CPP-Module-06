@@ -6,12 +6,13 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:39:04 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/10 19:06:50 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/11 21:29:35 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 #include "general.hpp"
+
 
 /*	*	*	ORTHODOX CANONICAL	*	*	*/
 ScalarConverter::ScalarConverter() {}
@@ -47,11 +48,29 @@ static bool	isChar(const std::string& input)
 
 static bool	isNumberType(const std::string& input, int precision)
 {
-	unsigned int	length;
-	bool		pointFound = false;
+	unsigned int		length;
+	bool			pointFound = false;
+	const std::string	doublePseudoLiterals[3] = {"nan", "+inf", "-inf"},
+	      			floatPseudoLiterals[3] = {"nanf", "+inff", "-inff"};
 
-	//HOW DETECT NAN, NANF, NANFF & co.?????!?!?!?!
 	length = input.length();
+	if (precision == DOUBLE)
+	{
+		for (int i = 0; i < 3; ++i)
+		{
+			if (input.compare(doublePseudoLiterals[i]) == 0)
+				return true;
+		}
+	}
+	if (precision == FLOAT)
+	{
+		for (int i = 0; i < 3; ++i)
+		{
+			if (input.compare(floatPseudoLiterals[i]) == 0)
+				return true;
+		}
+	}
+
 	for (unsigned int i = 0; i < length; ++i)
 	{
 		if (i == 0 && (input[i] == '-' || input[i] == '+'))
@@ -89,6 +108,7 @@ static int	typeDetect(const std::string& input)
 
 static void	castOtherTypes(ConversionOutput& output, int index)
 {
+	long	preCastToInt;
 
 	switch (index)
 	{
@@ -105,36 +125,83 @@ static void	castOtherTypes(ConversionOutput& output, int index)
 			break;
 		case INT:
 			int	i;
-
 			i = output.getInt();
-			output.setChar(static_cast<char>(i));
-			output.setCheck(true, CHAR);
+
+			if (i >= std::numeric_limits<char>::min()
+				&& i <= std::numeric_limits<char>::max())
+			{
+				output.setChar(static_cast<char>(i));
+				output.setCheck(true, CHAR);
+			}
+			
 			output.setFloat(static_cast<float>(i));
 			output.setCheck(true, FLOAT);
+			
 			output.setDouble(static_cast<double>(i));
 			output.setCheck(true, DOUBLE);
 			break;
+
 		case FLOAT:
 			float	f;
-
 			f = output.getFloat();
-			output.setChar(static_cast<char>(f));
-			output.setCheck(true, CHAR);
-			output.setInt(static_cast<int>(f));
-			output.setCheck(true, INT);
-			output.setDouble(static_cast<double>(f));
-			output.setCheck(true, DOUBLE);
+
+			if (f >= std::numeric_limits<char>::min()
+				&& f <= std::numeric_limits<char>::max())
+			{
+				output.setChar(static_cast<char>(f));
+				output.setCheck(true, CHAR);
+			}
+
+			preCastToInt = static_cast<long>(f);
+			if (preCastToInt >= std::numeric_limits<int>::min()
+				&& preCastToInt <= std::numeric_limits<int>::max())
+			{
+				output.setInt(static_cast<int>(f));
+				output.setCheck(true, INT);
+			}
+
+			
+			//Might I remove these protections???
+			//if (f >= std::numeric_limits<double>::lowest()
+			//	&& f <= std::numeric_limits<double>::max())
+			{
+				//PROBLEMS HERE WITH PSEUDO LITERALS
+				output.setDouble(static_cast<double>(f));
+				output.setCheck(true, DOUBLE);
+			}
+
 			break;
+
 		case DOUBLE:
 			double	d;
-			
 			d = output.getDouble();
-			output.setChar(static_cast<char>(d));
-			output.setCheck(true, CHAR);
-			output.setInt(static_cast<int>(d));
-			output.setCheck(true, INT);
-			output.setFloat(static_cast<float>(d));
-			output.setCheck(true, FLOAT);
+
+			if (d >= std::numeric_limits<char>::min()
+				&& d <= std::numeric_limits<char>::max())
+			{
+				output.setChar(static_cast<char>(d));
+				output.setCheck(true, CHAR);
+			}
+
+			preCastToInt = static_cast<long>(d);
+			if (preCastToInt >= std::numeric_limits<int>::min()
+				&& preCastToInt <= std::numeric_limits<int>::max())
+			{
+				output.setInt(static_cast<int>(d));
+				output.setCheck(true, INT);
+			}
+
+			if (d >= std::numeric_limits<float>::lowest()
+				&& d <= std::numeric_limits<float>::max())
+			{
+				output.setFloat(static_cast<float>(d));
+				output.setCheck(true, FLOAT);
+			}
+			if (d != std::numeric_limits<double>::quiet_NaN())
+			{
+				output.setFloat(static_cast<float>(d));
+				output.setCheck(true, FLOAT);
+			}
 			break;
 	}
 }
@@ -162,15 +229,41 @@ void	ScalarConverter::convert(const std::string& input,
 			long	preConvertedToInt;
 
 			std::stringstream(input) >> preConvertedToInt;
-			if (preConvertedToInt >= std::numeric_limits<int>::min() && preConvertedToInt <= std::numeric_limits<int>::max())
+			if (preConvertedToInt >= std::numeric_limits<int>::min()
+				&& preConvertedToInt <= std::numeric_limits<int>::max())
 			{
 				output.setInt(static_cast<int>(preConvertedToInt));
 				output.setCheck(true, index);
 				castOtherTypes(output, index);
 			}
 			break;
+
 		case FLOAT:
 			double	preConvertedToFloat;
+			
+			if (input.compare("nanf") == 0)
+			{
+				output.setFloat(std::numeric_limits<float>::quiet_NaN());
+				output.setCheck(true, index);
+				castOtherTypes(output, index);
+				break;
+			}
+			
+			if (input.compare("+inff") == 0)
+			{
+				output.setFloat(std::numeric_limits<float>::infinity());
+				output.setCheck(true, index);
+				castOtherTypes(output, index);
+				break;
+			}
+
+			if (input.compare("-inff") == 0)
+			{
+				output.setFloat(-std::numeric_limits<float>::infinity());
+				output.setCheck(true, index);
+				castOtherTypes(output, index);
+				break;
+			}
 			
 			std::stringstream(input) >> preConvertedToFloat;
 			if (preConvertedToFloat >= std::numeric_limits<float>::lowest()
@@ -181,16 +274,42 @@ void	ScalarConverter::convert(const std::string& input,
 				castOtherTypes(output, index);
 			}
 			break;
+
 		case DOUBLE:
 			long double	preConvertedToDouble;
+			
+			if (input.compare("nan") == 0)
+			{
+				output.setDouble(std::numeric_limits<double>::quiet_NaN());
+				output.setCheck(true, index);
+				castOtherTypes(output, index);
+				break;
+			}
 
+			if (input.compare("+inf") == 0)
+			{
+				output.setDouble(std::numeric_limits<double>::infinity());
+				output.setCheck(true, index);
+				castOtherTypes(output, index);
+				break;
+			}
+
+			if (input.compare("-inf") == 0)
+			{
+				output.setDouble(-std::numeric_limits<double>::infinity());
+				output.setCheck(true, index);
+				castOtherTypes(output, index);
+				break;
+			}
+			
 			std::stringstream(input) >> preConvertedToDouble;
-			if (preConvertedToDouble >= std::numeric_limits<double>::min()
+			if (preConvertedToDouble >= std::numeric_limits<double>::lowest()
 				&& preConvertedToDouble <= std::numeric_limits<double>::max())
 			output.setDouble(preConvertedToDouble);
 			output.setCheck(true, index);
 			castOtherTypes(output, index);
 			break;
+
 		default:
 			return;
 	}
