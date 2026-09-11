@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:39:04 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/11 21:29:35 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/11 22:16:55 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,56 @@ static void	castOtherTypes(ConversionOutput& output, int index)
 			break;
 	}
 }
+//
+/*	-	- PSEUDO LITERALS -	-	*/
+
+static bool	floatIsPseudoLiteral(const std::string& input,
+		ConversionOutput& output, int index)
+{
+	if (input.compare("nanf") == 0)
+	{
+		output.setFloat(std::numeric_limits<float>::quiet_NaN());
+		output.setCheck(true, index);
+		castOtherTypes(output, index);
+		return true;
+	}
+			
+	if (input.compare("+inff") == 0 || input.compare("-inff") == 0)
+	{
+		if (input[0] == '+')
+			output.setFloat(std::numeric_limits<float>::infinity());
+		else
+			output.setFloat(-std::numeric_limits<float>::infinity());
+		output.setCheck(true, index);
+		castOtherTypes(output, index);
+		return true;
+	}
+	return false;
+}
+
+static bool	doubleIsPseudoLiteral(const std::string& input,
+		ConversionOutput& output, int index)
+{
+	if (input.compare("nan") == 0)
+	{
+		output.setDouble(std::numeric_limits<double>::quiet_NaN());
+		output.setCheck(true, index);
+		castOtherTypes(output, index);
+		return true;
+	}
+	
+	if (input.compare("+inf") == 0 || input.compare("-inf") == 0)
+	{
+		if (input[0] == '+')
+			output.setDouble(std::numeric_limits<double>::infinity());
+		else
+			output.setDouble(-std::numeric_limits<double>::infinity());
+		output.setCheck(true, index);
+		castOtherTypes(output, index);
+		return true;
+	}
+	return false;
+}
 
 void	ScalarConverter::convert(const std::string& input,
 		ConversionOutput& output)
@@ -225,6 +275,7 @@ void	ScalarConverter::convert(const std::string& input,
 			output.setCheck(true, index);
 			castOtherTypes(output, index);
 			break;
+
 		case INT:
 			long	preConvertedToInt;
 
@@ -241,30 +292,8 @@ void	ScalarConverter::convert(const std::string& input,
 		case FLOAT:
 			double	preConvertedToFloat;
 			
-			if (input.compare("nanf") == 0)
-			{
-				output.setFloat(std::numeric_limits<float>::quiet_NaN());
-				output.setCheck(true, index);
-				castOtherTypes(output, index);
+			if (floatIsPseudoLiteral(input, output, index))
 				break;
-			}
-			
-			if (input.compare("+inff") == 0)
-			{
-				output.setFloat(std::numeric_limits<float>::infinity());
-				output.setCheck(true, index);
-				castOtherTypes(output, index);
-				break;
-			}
-
-			if (input.compare("-inff") == 0)
-			{
-				output.setFloat(-std::numeric_limits<float>::infinity());
-				output.setCheck(true, index);
-				castOtherTypes(output, index);
-				break;
-			}
-			
 			std::stringstream(input) >> preConvertedToFloat;
 			if (preConvertedToFloat >= std::numeric_limits<float>::lowest()
 				&& preConvertedToFloat <= std::numeric_limits<float>::max())
@@ -278,30 +307,8 @@ void	ScalarConverter::convert(const std::string& input,
 		case DOUBLE:
 			long double	preConvertedToDouble;
 			
-			if (input.compare("nan") == 0)
-			{
-				output.setDouble(std::numeric_limits<double>::quiet_NaN());
-				output.setCheck(true, index);
-				castOtherTypes(output, index);
+			if (doubleIsPseudoLiteral(input, output, index))
 				break;
-			}
-
-			if (input.compare("+inf") == 0)
-			{
-				output.setDouble(std::numeric_limits<double>::infinity());
-				output.setCheck(true, index);
-				castOtherTypes(output, index);
-				break;
-			}
-
-			if (input.compare("-inf") == 0)
-			{
-				output.setDouble(-std::numeric_limits<double>::infinity());
-				output.setCheck(true, index);
-				castOtherTypes(output, index);
-				break;
-			}
-			
 			std::stringstream(input) >> preConvertedToDouble;
 			if (preConvertedToDouble >= std::numeric_limits<double>::lowest()
 				&& preConvertedToDouble <= std::numeric_limits<double>::max())

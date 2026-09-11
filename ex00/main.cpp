@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 15:09:07 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/10 19:04:31 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/11 22:06:31 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ static void	print(ConversionOutput obj, int index)
 			else
 				std::cout << "char: impossible" << std::endl;
 			break;
+
 		case INT:
 			if (obj.getCheck(index))
 				std::cout << "int: " << obj.getInt() << std::endl;
 			else
 				std::cout << "int: impossible" << std::endl;
 			break;
+
 		case FLOAT:
 			if (obj.getCheck(index))
 			{
@@ -40,6 +42,7 @@ static void	print(ConversionOutput obj, int index)
 			else
 				std::cout << "float: impossible" << std::endl;
 			break;
+
 		case DOUBLE:
 			if (obj.getCheck(index))
 			{
