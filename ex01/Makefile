@@ -6,13 +6,13 @@
 #    By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/20 15:02:53 by enrgil-p          #+#    #+#              #
-#    Updated: 2026/09/10 19:34:16 by enrgil-p         ###   ########.fr        #
+#    Updated: 2026/09/12 20:10:45 by enrgil-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = serialization_ex01
 
-SOURCES =	
+SOURCES =	main.cpp Serializer.cpp
 
 COMPILER = c++
 C_FLAGS = -Wall -Wextra -Werror -MMD -MP

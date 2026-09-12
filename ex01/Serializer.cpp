@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/12 19:14:18 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/12 19:20:50 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/12 21:21:43 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,22 @@
 
 Serializer::Serializer() {}
 
-Serializer::Serializer(const Serializer& other) {}
+Serializer::Serializer(const Serializer& other) {*this = other;;}
 
-Serializer&	Serializer::operator=(const Serializer& rhs) {return *this;}
+Serializer&	Serializer::operator=(const Serializer &)
+{
+	return *this;
+}
 
 Serializer::~Serializer() {}
+
+uintptr_t	Serializer::serialize(Data *ptr)
+{
+	uintptr_t address = reinterpret_cast<uintptr_t>(&ptr);
+	return address;
+}
+
+Data*	Serializer::deserialize(uintptr_t raw)
+{
+	return reinterpret_cast<Data*>(raw);
+}

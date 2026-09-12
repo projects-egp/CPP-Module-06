@@ -6,12 +6,14 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/10 19:35:49 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/10 19:46:13 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/12 20:14:57 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SERIALIZER_HPP
 # define SERIALIZER_HPP
+
+# include "data.hpp"
 
 class Serializer
 {
