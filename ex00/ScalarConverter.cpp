@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:39:04 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/12 19:21:44 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/12 20:27:14 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ ScalarConverter::ScalarConverter() {}
 
 ScalarConverter::ScalarConverter(const ScalarConverter& other) {*this = other;}
 
-ScalarConverter&	ScalarConverter::operator=(const ScalarConverter& rhs)
+ScalarConverter&	ScalarConverter::operator=(const ScalarConverter&)
 {
 	return (*this);
 }
