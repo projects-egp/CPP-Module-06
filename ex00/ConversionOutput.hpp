@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 18:31:51 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/08 18:28:08 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/12 18:03:00 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ class ConversionOutput
 		void	setFloat(float f);
 		void	setDouble(double d);
 		void	setCheck(bool status, int index);
+		//
+		void	print(int type) const;
 
 	protected:
 	private:

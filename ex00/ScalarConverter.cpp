@@ -6,13 +6,30 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:39:04 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/11 22:16:55 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/12 19:21:44 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 #include "general.hpp"
 
+/************************************************************************/
+/*									*/
+/*				FILE'S INDEX				*/
+/*									*/
+/*	lines								*/
+/*									*/
+/*	34 - 44		orthodox canonical				*/
+/*									*/
+/*	49 - 113	detect types					*/
+/*									*/
+/*	119 - ???	cast to other types				*/
+/*									*/
+/*	lines		float && double pseudo-literales managed	*/
+/*									*/
+/*	lines		ScalarConverter::convert()			*/
+/*									*/
+/************************************************************************/
 
 /*	*	*	ORTHODOX CANONICAL	*	*	*/
 ScalarConverter::ScalarConverter() {}
@@ -21,17 +38,10 @@ ScalarConverter::ScalarConverter(const ScalarConverter& other) {*this = other;}
 
 ScalarConverter&	ScalarConverter::operator=(const ScalarConverter& rhs)
 {
-	if (this != &rhs)
-		*this = rhs;
 	return (*this);
 }
 
 ScalarConverter::~ScalarConverter() {}
-//
-//
-//
-//
-//
 
 /*	*	*	CONVERTER && UTILS	*	*	*/
 //
@@ -136,7 +146,7 @@ static void	castOtherTypes(ConversionOutput& output, int index)
 			
 			output.setFloat(static_cast<float>(i));
 			output.setCheck(true, FLOAT);
-			
+
 			output.setDouble(static_cast<double>(i));
 			output.setCheck(true, DOUBLE);
 			break;
