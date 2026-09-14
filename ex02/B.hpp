@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   A.hpp                                              :+:      :+:    :+:   */
+/*   B.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/12 21:36:58 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/14 17:58:37 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/14 17:59:49 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef A_HPP
-# define A_HPP
+#ifndef B_HPP
+# define B_HPP
 
 #include "Base.hpp"
 
-class A : public Base
+class B : public Base
 {
 };
 

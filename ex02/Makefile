@@ -6,13 +6,13 @@
 #    By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/20 15:02:53 by enrgil-p          #+#    #+#              #
-#    Updated: 2026/09/12 21:26:57 by enrgil-p         ###   ########.fr        #
+#    Updated: 2026/09/14 18:19:26 by enrgil-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = identifier_ex02
 
-SOURCES =	
+SOURCES =	main.cpp Base.cpp
 
 COMPILER = c++
 C_FLAGS = -Wall -Wextra -Werror -MMD -MP

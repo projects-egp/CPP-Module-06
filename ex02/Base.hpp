@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/12 21:35:23 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/12 21:36:37 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:20:54 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ class	 Base
 {
 	public:
 		virtual	~Base();
-	protected:
-	private:
-}
+};
 
 #endif
