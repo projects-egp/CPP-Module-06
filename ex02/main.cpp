@@ -6,100 +6,23 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/12 22:22:01 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/14 20:46:33 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/17 16:13:31 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.hpp"
 
-Base*	generate(void)
-{
-	static bool	randomSeedInit = false;
-	int		randomGenerator;
-	Base*		result;
-
-	if (!randomSeedInit)
-	{
-		std::srand(std::time(NULL));
-		randomSeedInit = true;
-	}
-	randomGenerator = std::rand() % 3;
-	switch (randomGenerator)
-	{
-		case 0:
-			result = new A();
-			break ;
-		case 1:
-			result = new B();
-			break ;
-		case 2:
-			result = new C();
-			break ;
-	}
-	return result;
-}
-
-void	identify(Base* p)
-{
-	A*	ptrA;
-	B*	ptrB;
-	C*	ptrC;
-
-	ptrA = dynamic_cast<A*>(p);
-	ptrB = dynamic_cast<B*>(p);
-	ptrC = dynamic_cast<C*>(p);
-	if (ptrA != NULL)
-		std::cout << "\tThis Base* points to an 'A' object" << std::endl;
-	else if (ptrB != NULL)
-		std::cout << "\tThis Base* points to a 'B' object" << std::endl;
-	else if (ptrC != NULL)
-		std::cout << "\tThis Base* points to a 'C' object" << std::endl;
-	else
-		std::cout << "\tThis Base* is not a child class" <<std::endl;
-}
-
-void	identify(Base& p)
-{
-	A	refA;
-	B	refB;
-	C	refC;
-	
-	try 
-	{
-		refA = dynamic_cast<A&>(p);
-		std::cout << "\tThis Base& is an 'A' object" << std::endl;
-		return ;
-	}
-	catch (std::exception & e){}
-	
-	try 
-	{
-		refB = dynamic_cast<B&>(p);
-		std::cout << "\tThis Base& is a 'B' object" << std::endl;
-		return ;
-	}
-	catch (std::exception & e){}
-	
-	try 
-	{
-		refC = dynamic_cast<C&>(p);
-		std::cout << "\tThis Base& is a 'C' object" << std::endl;
-		return ;
-	}
-	catch (std::exception & e){}
-	std::cout << "\tThis Base& is not a child class" <<std::endl;
-}
-
-
 int	main(void)
 {
 	Base	*x, *y, *z, *null = NULL, not_child;
+	std::cout << "Created Base: *x, *y, *z, *null, not_child\n" << std::endl;
 
 	x = generate();y = generate();z = generate();
+	std::cout << "Generated a child object to Base pointers x, y and z" << std::endl;
 
-	std::cout << "\n\nGoing to null by pointer" << std::endl;
+	std::cout << "\n\nGoing to identify null by pointer" << std::endl;
 	identify(null);
-	std::cout << "Going to *null by reference" << std::endl;
+	std::cout << "Going to identify *null by reference" << std::endl;
 	identify(*null);
 
 	std::cout << "\n\nGoing to identify x by pointer" << std::endl;
