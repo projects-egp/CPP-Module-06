@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/10 19:35:49 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/12 20:14:57 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/22 18:51:37 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define SERIALIZER_HPP
 
 # include "data.hpp"
+
+typedef size_t	uintptr_t;
 
 class Serializer
 {
