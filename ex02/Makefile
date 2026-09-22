@@ -6,7 +6,7 @@
 #    By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/20 15:02:53 by enrgil-p          #+#    #+#              #
-#    Updated: 2026/09/17 16:02:56 by enrgil-p         ###   ########.fr        #
+#    Updated: 2026/09/18 13:44:15 by enrgil-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SOURCES =	main.cpp Base.cpp generate.cpp identifiers.cpp
 COMPILER = c++
 C_FLAGS = -Wall -Wextra -Werror -MMD -MP
 STANDARD_FLAG = -std=c++98
+LOCK_TYPEINFO_FLAG = -fno-rtti
 
 RM = rm -f
 
@@ -30,7 +31,7 @@ DEPENDENCIES = $(OBJECTS:.o=.d)
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	@$(COMPILER) $(C_FLAGS) $(STANDARD_FLAG) $(OBJECTS) -o $(NAME)
+	@$(COMPILER) $(C_FLAGS) $(STANDARD_FLAG) $(LOCK_TYPEINFO_FLAG) $(OBJECTS) -o $(NAME)
 	@$(info CREATED $(NAME))
 
 -include $(DEPENDENCIES)
