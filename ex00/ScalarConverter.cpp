@@ -14,21 +14,21 @@
 #include "general.hpp"
 
 /************************************************************************/
-/*									*/
-/*				FILE'S INDEX				*/
-/*									*/
-/*	lines								*/
-/*									*/
-/*	34 - 44		orthodox canonical				*/
-/*									*/
-/*	49 - 113	detect types					*/
-/*									*/
-/*	119 - ???	cast to other types				*/
-/*									*/
-/*	lines		float && double pseudo-literales managed	*/
-/*									*/
-/*	lines		ScalarConverter::convert()			*/
-/*									*/
+/*																		*/
+/*				FILE'S INDEX											*/
+/*																		*/
+/*	lines																*/
+/*																		*/
+/*	34 - 44		orthodox canonical										*/
+/*																		*/
+/*	49 - 113	detect types											*/
+/*																		*/
+/*	119 - ???	cast to other types										*/
+/*																		*/
+/*	lines		float && double pseudo-literales managed				*/
+/*																		*/
+/*	lines		ScalarConverter::convert()								*/
+/*																		*/
 /************************************************************************/
 
 /*	*	*	ORTHODOX CANONICAL	*	*	*/
