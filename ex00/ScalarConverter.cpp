@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:39:04 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/12 20:27:14 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/23 18:31:09 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 /*																		*/
 /*	lines																*/
 /*																		*/
-/*	34 - 44		orthodox canonical										*/
+/*	34 - 45		orthodox canonical										*/
 /*																		*/
-/*	49 - 113	detect types											*/
+/*	50 - 113	detect types											*/
 /*																		*/
-/*	119 - ???	cast to other types										*/
+/*	120 - 213	cast to other types										*/
 /*																		*/
-/*	lines		float && double pseudo-literales managed				*/
+/*	217 - 263	float && double pseudo-literales managed				*/
 /*																		*/
-/*	lines		ScalarConverter::convert()								*/
+/*	266 - 328	ScalarConverter::convert()								*/
 /*																		*/
 /************************************************************************/
 
@@ -36,8 +36,9 @@ ScalarConverter::ScalarConverter() {}
 
 ScalarConverter::ScalarConverter(const ScalarConverter& other) {*this = other;}
 
-ScalarConverter&	ScalarConverter::operator=(const ScalarConverter&)
+ScalarConverter&	ScalarConverter::operator=(const ScalarConverter& rhs)
 {
+	(void)rhs;
 	return (*this);
 }
 
@@ -133,6 +134,7 @@ static void	castOtherTypes(ConversionOutput& output, int index)
 			output.setDouble(static_cast<double>(c));
 			output.setCheck(true, DOUBLE);
 			break;
+
 		case INT:
 			int	i;
 			i = output.getInt();
@@ -170,15 +172,9 @@ static void	castOtherTypes(ConversionOutput& output, int index)
 				output.setCheck(true, INT);
 			}
 
-			
-			//Might I remove these protections???
-			//if (f >= std::numeric_limits<double>::lowest()
-			//	&& f <= std::numeric_limits<double>::max())
-			{
-				//PROBLEMS HERE WITH PSEUDO LITERALS
-				output.setDouble(static_cast<double>(f));
-				output.setCheck(true, DOUBLE);
-			}
+		//Tried to protect this, but goes to bad cast -inff to -inf
+			output.setDouble(static_cast<double>(f));
+			output.setCheck(true, DOUBLE);
 
 			break;
 
@@ -266,10 +262,10 @@ static bool	doubleIsPseudoLiteral(const std::string& input,
 	return false;
 }
 
-void	ScalarConverter::convert(const std::string& input,
-		ConversionOutput& output)
+void	ScalarConverter::convert(const std::string& input)
 {
-	int	index;
+	ConversionOutput	output;
+	int			index;
 
 	index = typeDetect(input);
 	switch (index)
@@ -278,7 +274,7 @@ void	ScalarConverter::convert(const std::string& input,
 			char	c;
 
 			if (input.length() == 1)
-				c = input[0];//IS THIS CORRECT? OR SHOUD CAST?
+				c = input[0];
 			else
 				c = input[1];
 			output.setChar(c);
@@ -326,8 +322,7 @@ void	ScalarConverter::convert(const std::string& input,
 			output.setCheck(true, index);
 			castOtherTypes(output, index);
 			break;
-
-		default:
-			return;
 	}
+	for (int type = CHAR; type < ALL; ++type)
+		output.print(type);
 }
