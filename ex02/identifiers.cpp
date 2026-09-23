@@ -60,5 +60,5 @@ void	identify(Base& p)
 		return ;
 	}
 	catch (std::exception & e){}
-	std::cout << "\tThis Base& is not a child class" <<std::endl;
+	std::cout << "\tThis Base& is not a child class" << std::endl;
 }
