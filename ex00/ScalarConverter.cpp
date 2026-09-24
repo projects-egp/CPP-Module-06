@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:39:04 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/24 16:07:44 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/24 16:14:53 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,8 @@ static void	castOtherTypes(ConversionOutput& output, int index)
 	{
 		case CHAR:
 			char	c;
-			
 			c = output.getChar();
+
 			output.setInt(static_cast<int>(c));
 			output.setCheck(true, INT);
 			output.setFloat(static_cast<float>(c));
@@ -175,7 +175,6 @@ static void	castOtherTypes(ConversionOutput& output, int index)
 		//Tried to protect this, but goes to bad cast -inff to -inf
 			output.setDouble(static_cast<double>(f));
 			output.setCheck(true, DOUBLE);
-
 			break;
 
 		case DOUBLE:
