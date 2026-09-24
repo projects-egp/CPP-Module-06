@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:39:04 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/09/23 18:31:09 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/09/24 16:07:44 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,8 @@ static void	castOtherTypes(ConversionOutput& output, int index)
 				output.setFloat(static_cast<float>(d));
 				output.setCheck(true, FLOAT);
 			}
+			
+			//Needed to cast from nan to nanf
 			if (d != std::numeric_limits<double>::quiet_NaN())
 			{
 				output.setFloat(static_cast<float>(d));
